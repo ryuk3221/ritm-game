@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <audio class="audio-pop" src="sounds/drum-hitnormal.mp3"></audio>
+  <audio class="music" src="sounds/1.mp3"></audio>
+  <div class="wrapper">
+    <div class="metronom">
+      <div class="">BPM: <span class="bpm"> 121</span></div>
+      <div class="metronom__item"></div>
+      <div class="metronom__item"></div>
+      <div class="metronom__item"></div>
+      <div class="metronom__item"></div>
+      <button class="play">Play</button>
+    </div>
+    
+    <div class="music-timeline">
+      <!-- указатель -->
+      <span class="arrow"></span>
+      <span class="music-second">0</span>
+    </div>
+  </div>
+  <script src="create-map.js"></script>
+</body>
+</html>
