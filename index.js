@@ -10,8 +10,8 @@ function createNote(key) {
   const note = document.createElement('div');
   note.classList.add('note');
   note.classList.add(`note${key}`)
-  note.style.left = `${46 * key - 46}px`; // Позиция по X
-  note.style.top = '0px'; // Начальная позиция по Y
+  note.style.left = `${46 * key - 46}px`;
+  note.style.top = '0px';
   notesContainer.appendChild(note);
   note.dataset.notecolumn = key;
 
@@ -36,8 +36,11 @@ const startBtn = document.querySelector('.btn-start');
 const music = document.querySelector('.music');
 music.volume = 0.7;
 
+
+let currentMap;
+
 startBtn.addEventListener('click', () => {
-  maps[0].notes.forEach(note => {
+  currentMap.notes.forEach(note => {
     setTimeout(() => {
       createNote(note.dataKey);
     }, note.delay);
@@ -140,10 +143,14 @@ window.onkeyup = () => {
 const game = document.querySelector('.game');
 const menu = document.querySelector('.menu');
 let choosedMap = false;
+const gameImg = document.querySelector('.game--img');
 
 window.addEventListener('click', (event) => {
   if (event.target.closest('.menu__item')) {
-
+    const mapId = event.target.closest('.menu__item').dataset.map;
+    currentMap = maps.find(map => map.id === mapId)
+    gameImg.style.backgroundImage = `url(${currentMap.img})`;
+    music.setAttribute('src', `${currentMap.music}`);
   }
 
   if (event.target.closest('.menu__btn')) {
