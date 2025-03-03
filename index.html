@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="game--img" style="background-image: url(images/menu.jpg);"></div>
+    <div class="game--bg"></div>
+    <div class="game">
+      
+      <div class="game-container">
+        <div class="timer">0</div>
+        <button class="btn-start">Начать</button>
+        <div class="notes-container">
+
+        </div>
+        <div class="buttons">
+          <div data-key="1">S</div>
+          <div data-key="2">D</div>
+          <div data-key="3">F</div>
+          <div data-key="4">J</div>
+          <div data-key="5">K</div>
+          <div data-key="6">L</div>
+        </div>
+      </div>
+      
+      <audio class="audio1" src="sounds/drum-hitnormal.mp3"></audio>
+      <audio class="music" src="sounds/1.mp3"></audio>
+    </div>
+    <div class="menu">
+      <div class="menu__title">Выберите карту</div>
+      <div class="menu__items">
+        <div class="menu__item" data-map="0">
+          <img src="images/map1.jpg" alt="">
+          <div class="menu__item-content">
+            <div class="menu__item-title">Yuumeikyou o Wakatsu Koto</div>
+            <div class="menu__item-subtitle">Сложность 5.5/10</div>
+          </div>
+        </div>
+        <div class="menu__item" data-map="1">
+          <img src="images/map2.jpg" alt="">
+          <div class="menu__item-content">
+            <div class="menu__item-title">The rise Yousei Teikoku</div>
+            <div class="menu__item-subtitle">Сложность 7/10</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu__btn">Начать</div>
+    </div>
+  </div>
+
+
+  <script src="notes.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
