@@ -244,9 +244,9 @@ body {
 
 .timer {
   position: absolute;
-  font-size: 35px;
+  font-size: 56px;
   color: #fff;
-  bottom: 0px;
+  bottom: -11px;
   left: -100px;
   z-index: 43;
 }
@@ -310,6 +310,36 @@ body {
 
 .menu__item--seclected {
   width: 600px;
+  position: relative;
+  background: #5420d7;
+}
+
+.back-to-menu {
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: -175px;
+  top: -100px;
+  padding: 15px;
+  border-radius: 16px;
+  font-size: 35px;
+  max-width: 200px;
+  color: #fff;
+  text-align: center;
+  background-color: #5420d7;
+  transition: .2s ease;
+}
+
+.back-to-mnu:hover {
+  background-color: #ff5e00;
+}
+
+.points-wrapper {
+  position: absolute;
+  top: -85px;
+  left: 355px;
+  font-size: 35px;
+  white-space: nowrap;
 }
 
 .menu__btn {
@@ -324,6 +354,13 @@ body {
   text-align: center;
   background-color: #5420d7;
   transition: .2s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.menu__btn--show {
+  transform: translateY(0px);
+  opacity: 1;
 }
 
 .menu__btn:hover {

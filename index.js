@@ -1,10 +1,13 @@
 const notesContainer = document.querySelector('.notes-container');
 const buttons = document.querySelectorAll('.buttons button');
 
+const pointsHtml = document.querySelector('.points');
 
+const points = 10;  //кол-во оков за 1 попадание
 let time = 0;
-
+let totalPoints = 0;
 let combo = 0;
+
 
 function createNote(key) {
   const note = document.createElement('div');
@@ -34,7 +37,7 @@ function createNote(key) {
 
 const startBtn = document.querySelector('.btn-start');
 const music = document.querySelector('.music');
-music.volume = 0.7;
+music.volume = 0.5;
 
 
 let currentMap;
@@ -49,6 +52,14 @@ startBtn.addEventListener('click', () => {
   setTimeout(() => {
     music.play();
   }, 1550);
+
+
+  //функция которая вызывается по окончанию карты
+  setTimeout(() => {
+    menu.classList.remove('menu--hide');
+    game.classList.remove('game--open');
+    //код который будет отображать количество набранных очков и тд
+  }, currentMap.endTiming);
 });
 
 
@@ -72,7 +83,9 @@ function checkNoteHit(key) {
     if (parseInt(currentNote.style.top) > 610 && parseInt(currentNote.style.top) < 660) {
       //попадание
       combo += 1;
+      totalPoints += points * combo
       comboHtml.innerHTML = combo
+      pointsHtml.innerHTML = totalPoints
       currentNote.remove()
     } else {
       combo = 0;
@@ -151,10 +164,21 @@ window.addEventListener('click', (event) => {
     currentMap = maps.find(map => map.id === mapId)
     gameImg.style.backgroundImage = `url(${currentMap.img})`;
     music.setAttribute('src', `${currentMap.music}`);
+    if (document.querySelector('.menu__item--seclected')) {
+      document.querySelector('.menu__item--seclected').classList.remove('menu__item--seclected');
+    }
+
+    event.target.closest('.menu__item').classList.add('menu__item--seclected')
+
+    document.querySelector('.menu__btn').classList.add('menu__btn--show');
   }
 
   if (event.target.closest('.menu__btn')) {
     menu.classList.add('menu--hide');
     game.classList.add('game--open');
+  }
+
+  if (event.target.classList.contains('back-to-menu')) {
+    window.location.reload();
   }
 });

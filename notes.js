@@ -9606,14 +9606,16 @@ const maps = [
         id: 'map1',
         notes: notes1,
         img: 'images/map1.jpg',
-        music: 'sounds/1.mp3'
+        music: 'sounds/1.mp3',
+        endTiming: 332000
     },
 
     {
         id: 'map2',
         notes: notes2,
         img: 'images/map2.jpg',
-        music: 'sounds/2.mp3'
+        music: 'sounds/2.mp3',
+        endTiming: 265000
     }
 ];
 
