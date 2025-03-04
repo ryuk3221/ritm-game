@@ -395,3 +395,77 @@ body {
 .btn-start:hover {
   background-color: orangered;
 }
+
+.records {
+  position: fixed;
+  z-index: 2;
+  top: 100px;
+  left: 50px;
+  max-width: 700px;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(-150px);
+  visibility: hidden;
+}
+
+.records--show {
+  transition: .2s ease;
+  opacity: 1;
+  transform: translateX(0px);
+  visibility: visible;
+}
+
+.records__title {
+  font-size: 50px;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.records__item {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  background-color: transparent;
+  padding: 10px 10px 20px;
+  border-bottom: 5px solid #5420d7;
+  margin-bottom: 20px;
+}
+
+.records__item img {
+  width: 120px;
+  border-radius: 8px;
+}
+
+.records__item-content {
+  max-width: 270px;
+  flex-grow: 1;
+}
+
+.records__item-title {
+  font-size: 20px;
+  line-height: 25px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.records__points {
+  font-size: 17px;
+  font-weight: 600;
+  color: #ff5e00;
+}
+
+.number {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.menu__item-statistic {
+  margin-left: auto;
+  max-width: 200px;
+  flex-grow: 1;
+}
+
+.item-statistic__hits {
+  margin-top: 5px;
+}

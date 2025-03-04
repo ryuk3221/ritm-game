@@ -9604,6 +9604,7 @@ const notes2 = [
 const maps = [
     {
         id: 'map1',
+        name: "Yuumeikyou o Wakatsu Koto",
         notes: notes1,
         img: 'images/map1.jpg',
         music: 'sounds/1.mp3',
@@ -9612,6 +9613,7 @@ const maps = [
 
     {
         id: 'map2',
+        name: "The rise Yousei Teikoku",
         notes: notes2,
         img: 'images/map2.jpg',
         music: 'sounds/2.mp3',

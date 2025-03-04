@@ -1,3 +1,8 @@
+if (!window.localStorage.getItem('records')) {
+  window.localStorage.setItem('records', JSON.stringify([]));
+  console.log(JSON.parse(window.localStorage.getItem('records')))
+}
+
 const notesContainer = document.querySelector('.notes-container');
 const buttons = document.querySelectorAll('.buttons button');
 
@@ -7,6 +12,10 @@ const points = 10;  //кол-во оков за 1 попадание
 let time = 0;
 let totalPoints = 0;
 let combo = 0;
+let successHit = 0;  //кол-во попаданий
+let missHit = 0;  //кол-во промахов
+
+const records = document.querySelector('.records');
 
 
 function createNote(key) {
@@ -29,7 +38,8 @@ function createNote(key) {
       clearInterval(interval);
       notesContainer.removeChild(note);
       combo = 0;
-      comboHtml.innerHTML = combo
+      comboHtml.innerHTML = combo;
+      missHit++;
     }
   }, 10);
 }
@@ -50,6 +60,7 @@ startBtn.addEventListener('click', () => {
   });
 
   setTimeout(() => {
+    music.volume = 0.6;
     music.play();
   }, 1550);
 
@@ -58,7 +69,40 @@ startBtn.addEventListener('click', () => {
   setTimeout(() => {
     menu.classList.remove('menu--hide');
     game.classList.remove('game--open');
-    //код который будет отображать количество набранных очков и тд
+    music.volume = 0.2;
+    
+    
+    const record = {
+      id: currentMap.id,
+      name: currentMap.name,
+      img: currentMap.img,
+      score: {
+        success: successHit,
+        missHit: missHit,
+        points: totalPoints
+      }
+    }
+
+    const currentRecords = JSON.parse(window.localStorage.getItem('records'));
+    currentRecords.push(record);
+    window.localStorage.setItem('records', JSON.stringify(currentRecords));
+    console.log(JSON.parse(window.localStorage.getItem('records')));
+
+    combo = 0;
+    totalPoints = 0;
+    successHit = 0;
+    missHit = 0;
+    
+
+    pointsHtml.innerHTML = 0;
+    comboHtml.innerHTML = 0;
+
+    renderRecords(currentMap.id);
+
+    currentMap = null;
+    menu.classList.remove('menu--hide');
+    game.classList.remove('game--open');
+    records.classList.add('records--show');
   }, currentMap.endTiming);
 });
 
@@ -83,14 +127,16 @@ function checkNoteHit(key) {
     if (parseInt(currentNote.style.top) > 610 && parseInt(currentNote.style.top) < 660) {
       //попадание
       combo += 1;
-      totalPoints += points * combo
-      comboHtml.innerHTML = combo
-      pointsHtml.innerHTML = totalPoints
-      currentNote.remove()
+      totalPoints += points * combo;
+      successHit++;
+      comboHtml.innerHTML = combo;
+      pointsHtml.innerHTML = totalPoints;
+      currentNote.remove();
     } else {
+      missHit++;
       combo = 0;
-      comboHtml.innerHTML = combo
-      currentNote.remove()
+      comboHtml.innerHTML = combo;
+      currentNote.remove();
     }
   }
 
@@ -171,14 +217,48 @@ window.addEventListener('click', (event) => {
     event.target.closest('.menu__item').classList.add('menu__item--seclected')
 
     document.querySelector('.menu__btn').classList.add('menu__btn--show');
+
+    records.classList.add('records--show');
+
+    renderRecords(currentMap.id);
   }
 
   if (event.target.closest('.menu__btn')) {
     menu.classList.add('menu--hide');
     game.classList.add('game--open');
+    records.classList.remove('records--show');
   }
 
   if (event.target.classList.contains('back-to-menu')) {
     window.location.reload();
   }
 });
+
+
+const recordsItemsHtml = document.querySelector('.records__items'); 
+
+const renderRecords = (id) => {
+  recordsItemsHtml.innerHTML = '';
+  const records = JSON.parse(window.localStorage.getItem('records'));
+  const recordsById = records.filter(item => item.id == id);
+
+  recordsById.sort((a, b) => b.score.points - a.score.points);
+
+  recordsById.forEach((record, index) => {
+    const recordComponent = `
+      <div class="records__item">
+          <span class="number">${index + 1}.</span>
+          <img src="${record.img}" alt="">
+          <div class="records__item-content">
+            <div class="records__item-title">${record.name}</div>
+            <div class="records__points-wrapper">Количество очков: <span class="records__points">${record.score.points}</span></div>
+          </div>
+          <div class="menu__item-statistic">
+              <div class="item-statistic__hits">Кол-во попаданий: ${record.score.success}</div>
+              <div class="item-statistic__hits">Кол-во промахов: ${record.score.missHit}</div>
+            </div>
+        </div>
+    `;
+    recordsItemsHtml.insertAdjacentHTML('beforeend', recordComponent)
+  });
+};
