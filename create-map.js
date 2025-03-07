@@ -1,45 +1,63 @@
-// const bpmHtml = document.querySelector('.bpm');
+const bpmHtml = document.querySelector('.bpm');
 
-// const music = document.querySelector('.music');
-// music.volume = 0.1;
+const pop = document.querySelector('.audio-pop');
+pop.volume = 0.2;
+
+const music = document.querySelector('.music');
+music.volume = 0.5;
 
 
-
-// const pop = document.querySelector('.audio-pop');
-// pop.volume = 0.2;
-
-// const playMetronom = document.querySelector('.play');
-
-// const metronom = document.querySelector('.metronom');
-// const metronomItems = document.querySelectorAll('.metronom__item');
-// let indexOfMetronom = 0;
-
+const playMetronomBtn = document.querySelector('.play');
+const metronomHtml = document.querySelector('.metronom');
+const metronomItems = document.querySelectorAll('.metronom__item');
+let indexOfMetronom = 0;
 
 let musicTimeLine = 0;
 const timeHtml = document.querySelector('.music-second');
 
-// const mapTiming = (bpm) => {
-//   const inteval = Math.round(60000 / bpm);
 
-//   const intervalFunc = setInterval(() => {
-//     if (metronom.querySelector('.metronom__item--active')) {
-//       metronom.querySelector('.metronom__item--active').classList.remove('metronom__item--active');
-//     }
-//     metronomItems[indexOfMetronom].classList.add('metronom__item--active')
-//     indexOfMetronom++;
-//     if (indexOfMetronom > 3) {
-//       indexOfMetronom = 0;
-//     }
-//     music.play();
-//     pop.play();
-
-//     if (musicTimeLine == 33) {
-//       clearInterval(intervalFunc);
-//       bpmHtml.innerHTML = '151';
-//       mapTiming(151);
-//     }
-//   }, inteval);
+// const myInterval = (bpm, callback) => {
+//   //интервал метронома в мс
+//   const interval = Math.round(60000 / bpm);
+//   setTimeout(() => {
+//     callback();
+//     myInterval(bpm, callback);
+//   }, interval);
 // }
+
+// //функция которая
+// const playMetronom = () => {
+//   if (metronomHtml.querySelector('.metronom__item--active')) {
+//     metronomHtml.querySelector('.metronom__item--active').classList.remove('metronom__item--active');
+//   }
+//   //включаю звук щелчка метронома
+//   pop.play();
+//   metronomItems[indexOfMetronom].classList.add('metronom__item--active');
+//   indexOfMetronom++;
+//   if (indexOfMetronom > 3) {
+//     indexOfMetronom = 0;
+//   }
+// }
+
+// //функция которая останавливает интервал
+// const stopIntervalFuntion = () => {
+//   clearInterval(window.intervalFunction);
+// }
+
+// //по нажатию запускаю метроном с задержкой согалсну таймингу карты (таймингу трека)
+// playMetronomBtn.addEventListener('click', () => {
+//   //включаю музыку
+//   music.play();
+//   new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve('Начался интервал');
+//     }, 400);
+//   }).then(data => {
+//     console.log(data);
+//     myInterval(121, playMetronom);
+//   });
+
+// });
 
 // playMetronom.onclick = () => {
 //   mapTiming(121);
@@ -52,29 +70,12 @@ const timeHtml = document.querySelector('.music-second');
 
 const randomNumber = () => Math.floor(Math.random() * 6) + 1;
 
-// const playMetronom = document.querySelector('.play');
-// const music = document.querySelector('.music');
-// music.volume = 0.5;
-
 
 const timingNotes = [];
 // let currentTime = 0;
 
 
 
-
-const metronomHtml = document.querySelector('.metronom');
-const metronomItems = document.querySelectorAll('.metronom__item');
-let indexOfMetronom = 0;
-
-const bpmHtml = document.querySelector('.bpm');
-
-const pop = document.querySelector('.audio-pop');
-pop.volume = 0.2;
-
-const music = document.querySelector('.music');
-music.volume = 0.5;
-const playMetronom = document.querySelector('.play');
 
 // let currentTime = 0;
 
@@ -150,24 +151,9 @@ btnsSpeed.forEach(btn => {
 });
 
 
-
-// playMetronom.addEventListener('click', () => {
-//   music.play();
-//   // setInterval(() => {
-//   //   currentTime += 10;
-//   // }, 10);
-
-
-// });
-
-
-
 playBtn.addEventListener('click', () => {
   music.play();
-  // music.addEventListener('timeupdate', () => {
-  //   console.log(parseFloat(music.currentTime.toFixed(3)) * 1000);
-  // });
-  // metronomFunc(121);
+
   window.onkeydown = event => {
     if (event.code == 'Enter') {
       music.play();

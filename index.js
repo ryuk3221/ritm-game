@@ -70,8 +70,8 @@ startBtn.addEventListener('click', () => {
     menu.classList.remove('menu--hide');
     game.classList.remove('game--open');
     music.volume = 0.2;
-    
-    
+
+
     const record = {
       id: currentMap.id,
       name: currentMap.name,
@@ -92,7 +92,7 @@ startBtn.addEventListener('click', () => {
     totalPoints = 0;
     successHit = 0;
     missHit = 0;
-    
+
 
     pointsHtml.innerHTML = 0;
     comboHtml.innerHTML = 0;
@@ -150,7 +150,7 @@ pop.volume = 0.5;
 document.querySelectorAll('[data-key]');
 
 window.onkeydown = event => {
-  if (event.key == 's') {
+  if (event.code == 'KeyS') {
     pop.currentTime = 0;
     pop.play();
     document.querySelector('[data-key="1"]').classList.add('active')
@@ -158,35 +158,35 @@ window.onkeydown = event => {
 
   }
 
-  if (event.key == 'd') {
+  if (event.code == 'KeyD') {
     pop.currentTime = 0;
     pop.play();
     document.querySelector('[data-key="2"]').classList.add('active')
     checkNoteHit(2);
   }
 
-  if (event.key == 'f') {
+  if (event.code == 'KeyF') {
     pop.currentTime = 0;
     pop.play();
     document.querySelector('[data-key="3"]').classList.add('active')
     checkNoteHit(3);
   }
 
-  if (event.key == 'j') {
+  if (event.code == 'KeyJ') {
     pop.currentTime = 0;
     pop.play();
     document.querySelector('[data-key="4"]').classList.add('active')
     checkNoteHit(4);
   }
 
-  if (event.key == 'k') {
+  if (event.code == 'KeyK') {
     pop.currentTime = 0;
     pop.play();
     document.querySelector('[data-key="5"]').classList.add('active')
     checkNoteHit(5);
   }
 
-  if (event.key == 'l') {
+  if (event.code == 'KeyL') {
     pop.currentTime = 0;
     pop.play();
 
@@ -235,7 +235,7 @@ window.addEventListener('click', (event) => {
 });
 
 
-const recordsItemsHtml = document.querySelector('.records__items'); 
+const recordsItemsHtml = document.querySelector('.records__items');
 
 const renderRecords = (id) => {
   recordsItemsHtml.innerHTML = '';
