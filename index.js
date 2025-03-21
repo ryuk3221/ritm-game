@@ -19,6 +19,7 @@ const records = document.querySelector('.records');
 
 
 function createNote(key) {
+  const start = Date.now();
   const note = document.createElement('div');
   note.classList.add('note');
   note.classList.add(`note${key}`)
@@ -27,21 +28,37 @@ function createNote(key) {
   notesContainer.appendChild(note);
   note.dataset.notecolumn = key;
 
-  // Анимация движения ноты вниз
-  const interval = setInterval(() => {
-
+  requestAnimationFrame(function animate(currentTime) {
     const currentTop = parseFloat(note.style.top);
-    note.style.top = `${currentTop + 4}px`;
+    note.style.top = `${currentTop + 5}px`;
+
 
     // Если нота достигла низа, удаляем её
-    if (currentTop > 660) {
-      clearInterval(interval);
+    if (currentTop > 650) {
+      console.log(`Время - ${Date.now() - start}`)
       notesContainer.removeChild(note);
       combo = 0;
       comboHtml.innerHTML = combo;
       missHit++;
+    } else {
+      requestAnimationFrame(animate);
     }
-  }, 10);
+  });
+
+  // Анимация движения ноты вниз
+  // const interval = setInterval(() => {
+  //   const currentTop = parseFloat(note.style.top);
+  //   note.style.top = `${currentTop + 4}px`;
+
+  //   // Если нота достигла низа, удаляем её
+  //   if (currentTop > 660) {
+  //     clearInterval(interval);
+  //     notesContainer.removeChild(note);
+  //     combo = 0;
+  //     comboHtml.innerHTML = combo;
+  //     missHit++;
+  //   }
+  // }, 10);
 }
 
 
@@ -53,16 +70,26 @@ music.volume = 0.5;
 let currentMap;
 
 startBtn.addEventListener('click', () => {
+  // music.volume = 0.6;
+  // music.play();
   currentMap.notes.forEach(note => {
     setTimeout(() => {
       createNote(note.dataKey);
+      setTimeout(() => {
+        // document.querySelector(`[data-key="${note.dataKey}"]`).classList.add('active');
+        pop.currentTime = 0;
+        pop.play();
+        // setTimeout(() => {
+        //   document.querySelector(`[data-key="${note.dataKey}"]`).classList.remove('active');
+        // }, 20);
+      }, 1650);
     }, note.delay);
   });
 
   setTimeout(() => {
     music.volume = 0.6;
     music.play();
-  }, 1550);
+  }, 1650);
 
 
   //функция которая вызывается по окончанию карты

@@ -102,8 +102,7 @@ body {
   background-color: yellow;
   border-radius: 50%;
   top: 0;
-
-  will-change: bottom;
+  will-change: top;
   outline: none;
   z-index: 10;
 }
