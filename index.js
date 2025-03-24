@@ -289,3 +289,35 @@ const renderRecords = (id) => {
     recordsItemsHtml.insertAdjacentHTML('beforeend', recordComponent)
   });
 };
+
+// music.addEventListener('loadedmetadata', function () {
+//   console.log('Длительность:', music.duration.toFixed(4), 'секунд');
+// });
+
+const totalMs = 10000;
+const step = 99;
+const arr = [];
+const notes = [];
+
+for (let i = 0; i < 10000; i += step) {
+  arr.push(i);
+}
+
+const createTimingNote = (ms) => {
+  for (let k = 0; k < arr.length; k++) {
+    if (ms > arr[k] && ms < arr[k + 1]) {
+      const deltaLeft = ms - arr[k];
+      const deltaRight = arr[k + 1] - ms;
+
+      if (deltaLeft < deltaRight) {
+        console.log(`Ближайшее число: ${arr[k]}`);
+      } else {
+        console.log(`Ближайшее число: ${arr[k + 1]}`);
+      }
+      console.log(`Число ${ms} находится в интервале: c ${arr[k]} по ${arr[k + 1]}`);
+
+    }
+  }
+}
+
+createTimingNote(1500)
